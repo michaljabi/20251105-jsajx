@@ -15,7 +15,10 @@ const myItCrowd = {
 		list: ['Maurice', 'Jen', 'Roy']
 	},
 	office: {
+		noOfRooms: 5,
 		answerPhone() {
+			// później opowiemy o this w arrow function () => {}
+			console.log(this.noOfRooms);
 			return 'Have you tried to turn it off and on again?'
 		}
 	}
