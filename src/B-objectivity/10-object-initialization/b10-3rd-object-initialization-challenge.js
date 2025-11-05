@@ -14,7 +14,20 @@ import { assertThat } from '../../j4b1-assert.js'
 function dressUpAccordingToWeather(weatherProvider, props) {
 	// #Reguła:
 	// Możesz pisać tylko tutaj
-
+	const {name, lastName, has } = props;
+	const myUser = {
+		name: name,
+		lastName: lastName,
+		wearing: 'coat'
+	}
+	console.log(has);
+	myUser[has] = true;
+	// myUser.duck = true;
+	// myUser.mug = true;
+	if(weatherProvider === 'sunny') {
+		myUser.wearing = 't-shirt'
+	}
+	return myUser
 }
 
 
