@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "ritwickdey.LiveServer",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "vscode-icons-team.vscode-icons",
+    "achil.vscode-javascript-repl",
+    "wallabyjs.quokka-vscode",
+    "christian-kohler.path-intellisense",
+    "johnpapa.vscode-peacock"
+  ]
+}

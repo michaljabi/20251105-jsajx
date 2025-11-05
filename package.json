@@ -1,0 +1,53 @@
+{
+  "name": "jsajx",
+  "version": "2.0.0",
+  "description": "Zaawansowany JavaScript - teoria + ćwiczenia",
+  "scripts": {
+    "start": "echo \"Please install Quokka.js or JavaScript REPL and enjoy your exercises !\"",
+    "how-it-works": "nodemon src/00-Warm-up/003-how-those-examples-works.js",
+    "a10-wu": "nodemon src/A-the-modular-js/10-the-need-of-modularity/a10-1st-the-need-of-modularity-warm-up.js",
+    "a10-ch": "nodemon src/A-the-modular-js/10-the-need-of-modularity/a10-3rd-the-need-of-modularity-challenge.js",
+    "a20-wu": "nodemon src/A-the-modular-js/20-import-export-variants/a20-1st-import-export-variants-warm-up.js",
+    "a20-ch": "nodemon src/A-the-modular-js/20-import-export-variants/a20-3rd-import-export-variants-challenge.js",
+    "a30-wu": "nodemon src/A-the-modular-js/30-scope-of-code/a30-1st-scope-of-code-warm-up.js",
+    "b10-wu": "nodemon src/B-objectivity/10-object-initialization/b10-1st-object-initialization-warm-up.js",
+    "b10-ch": "nodemon src/B-objectivity/10-object-initialization/b10-3rd-object-initialization-challenge.js",
+    "b20-wu": "nodemon src/B-objectivity/20-what-is-this/b20-1st-what-is-this-warm-up.js",
+    "b20-ch": "nodemon src/B-objectivity/20-what-is-this/b20-3rd-what-is-this-challenge.js",
+    "b30-wu": "nodemon src/B-objectivity/30-based-on-prototype/b30-1st-based-on-prototype-warm-up.js",
+    "b30-ch": "nodemon src/B-objectivity/30-based-on-prototype/b30-3rd-based-on-prototype-challenge.js",
+    "b40-wu": "nodemon src/B-objectivity/40-cloning/b40-1st-cloning-warm-up.js",
+    "b40-ch": "nodemon src/B-objectivity/40-cloning/b40-3rd-cloning-challenge.js",
+    "b50-wu": "nodemon src/B-objectivity/50-setters-getters/b50-1st-setters-getters-warm-up.js",
+    "b50-ch": "nodemon src/B-objectivity/50-setters-getters/b50-3rd-setters-getters-challenge.js",
+    "b60-wu": "nodemon src/B-objectivity/60-my-private-things/b60-1st-my-private-things-warm-up.js",
+    "b60-ch": "nodemon src/B-objectivity/60-my-private-things/b60-3rd-my-private-things-challenge.js",
+    "b70-wu": "nodemon src/B-objectivity/70-error-catching/b70-1st-error-catching-warm-up.js",
+    "b70-ch": "nodemon src/B-objectivity/70-error-catching/b70-3rd-error-catching-challenge.js",
+    "c10-wu": "nodemon src/C-state/10-immutability/c10-1st-immutability-warm-up.js",
+    "d10-wu": "nodemon src/D-functional-programming/10-filter-map-reduce/d10-1st-filter-map-reduce-warm-up.js",
+    "d10-ch": "nodemon src/D-functional-programming/10-filter-map-reduce/d10-3rd-filter-map-reduce-challenge.js",
+    "d20-wu": "nodemon src/D-functional-programming/20-collection-api/d20-1st-collection-api-warm-up.js",
+    "d20-ch": "nodemon src/D-functional-programming/20-collection-api/d20-3rd-collection-api-challenge.js",
+    "d30-ch": "nodemon src/D-functional-programming/30-weak-collections/d30-3rd-weak-collections-challenge.js",
+    "d40-wu": "nodemon src/D-functional-programming/40-generators-iterators/d40-1st-generators-iterators-warm-up.js",
+    "d40-ch": "nodemon src/D-functional-programming/40-generators-iterators/d40-3rd-generators-iterators-challenge.js",
+    "e10-wu": "nodemon src/E-asynchronous-code/10-simplest-async/e10-1st-simplest-async-warm-up.js",
+    "e10-ch": "nodemon src/E-asynchronous-code/10-simplest-async/e10-3rd-simplest-async-challenge.js",
+    "e20-wu": "nodemon src/E-asynchronous-code/20-promise-to-escape-from-callback/e20-1st-promise-to-escape-from-callback-warm-up.js",
+    "e20-ch": "nodemon src/E-asynchronous-code/20-promise-to-escape-from-callback/e20-3rd-promise-to-escape-from-callback-challenge.js",
+    "e30-wu": "nodemon src/E-asynchronous-code/30-the-event-loop/e30-1st-the-event-loop-warm-up.js",
+    "g10-ch": "nodemon src/G-hot-news-from-JS-universum/10-using-symbols/g10-3rd-using-symbols-challenge.js",
+    "g20-ch": "nodemon src/G-hot-news-from-JS-universum/20-using-proxy/g20-3rd-using-proxy-challenge.js"
+  },
+  "author": "Jabi",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "immer": "^10.1.1",
+    "immutable": "^5.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Good old JS</title>
+</head>
+<body>
+    <h1 id="heading-1"></h1>
+    <script>
+        var ten = 10;
+        var $header = document.querySelector('#heading-1');
+        $header.innerHTML = 'Hello, today we will count to ' + ten;
+    </script>
+    <script>
+        var ten = 11;
+        console.log('or maybe we will count to:', ten, '?')
+    </script>
+    <script>
+        console.log('How much is:', ten);
+    </script>
+    <!--
+    <script>
+        var coverMeFromGlobalScope = 'Hello covered'
+    </script>
+    <script>
+        console.log(coverMeFromGlobalScope)
+    </script>
+    -->
+</body>
+</html>
