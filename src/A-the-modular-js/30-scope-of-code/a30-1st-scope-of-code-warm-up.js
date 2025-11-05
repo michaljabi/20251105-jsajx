@@ -13,6 +13,7 @@ function computeFullName() {
   const firstName = "John";
   const lastName = "Kowalsky";
   // Kod możesz pisać tylko w tym miejscu:
+  fullName = firstName  + ' ' + lastName
 }
 
 computeFullName();
