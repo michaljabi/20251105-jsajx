@@ -1,4 +1,4 @@
-import { assertThat } from '../../j4b1-assert.js'
+import { assertThat } from "../../j4b1-assert.js";
 /**
  * a10-the-need-of-modularity
  * Challenge
@@ -17,20 +17,30 @@ import { assertThat } from '../../j4b1-assert.js'
  */
 
 // pomocnicze maxValue (nie możesz zmieniać jego początkowego przypisania)
-let maxValue = 0;
+let maxValue = 0
 
 ;((moduleName, initialValue) => {
-	// #Reguła:
+  // #Reguła:
   // Nie możesz w środku tego scope'a zmieniać kodu!
-	console.log('ModuleName', moduleName);
+  console.log("ModuleName", moduleName);
 
-	maxValue = initialValue;
-})();
+  maxValue = initialValue;
+})("", 8000);
 
+function sum(a = 0, b = 0) {
+  console.log(a);
+  console.log(b);
+  console.log(a + b);
+}
+
+sum(2);
+sum(2, 3);
+sum(3);
+//sum(3, null);
+// sum(9, 10)
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
-assertThat(
-	'Max value from calculations should be equal 8000',
-	expect => expect(maxValue).toBe(8000)
-)  //=
+assertThat("Max value from calculations should be equal 8000", (expect) =>
+  expect(maxValue).toBe(8000)
+); //=
