@@ -1,3 +1,3 @@
-function countWords(sentence) {
+export function countWords(sentence) {
 	return (sentence.match(/\w+/g) || []).length
 }

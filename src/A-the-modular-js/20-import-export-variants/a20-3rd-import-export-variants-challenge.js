@@ -1,4 +1,5 @@
 import { assertThat } from '../../j4b1-assert.js'
+import { stringHelper, numberHelper } from './a20-challenge-project/czesuaf-util.js'
 
 /**
  * a20-import-export-variants
@@ -28,6 +29,7 @@ import { assertThat } from '../../j4b1-assert.js'
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
 const sampleString = 'Hello World';
+
 
 assertThat(
 	'lastLetter should give the last letter of the string',

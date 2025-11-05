@@ -1,12 +1,12 @@
 // DEFAULT
-import coffee from './mocha-coffee-default';
+import coffee from './mocha-coffee-default.js';
 
 // NAMED:
-import { coffeeName } from './mocha-coffee-named';
-import { coffeeName as otherCoffee } from './mocha-coffee-named';
+import { coffeeName } from './mocha-coffee-named.js';
+import { coffeeName as otherCoffee } from './mocha-coffee-named.js';
 
 // NAMESPACE:
-import * as coffees from './mocha-coffee-namespaced';
+import * as coffees from './mocha-coffee-namespaced.js';
 
 console.log(coffee)
 console.log(otherCoffee)

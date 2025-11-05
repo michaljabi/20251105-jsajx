@@ -7,6 +7,6 @@ export default {
 	}
 }
 
-function toSecondPower(num = 0) {
+export function toSecondPower(num = 0) {
 	return num ** 2;
 }
