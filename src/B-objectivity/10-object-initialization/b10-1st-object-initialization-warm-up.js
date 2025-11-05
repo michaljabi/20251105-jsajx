@@ -15,7 +15,7 @@ const myItCrowd = {
 		list: ['Maurice', 'Jen', 'Roy']
 	},
 	office: {
-		answerPhone: function() {
+		answerPhone() {
 			return 'Have you tried to turn it off and on again?'
 		}
 	}
