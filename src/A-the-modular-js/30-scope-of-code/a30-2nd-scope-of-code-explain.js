@@ -1,3 +1,4 @@
+// //@ts-check
 import { toSecondPower } from "../20-import-export-variants/a20-challenge-project/main/utils/some-util";
 
 //"use strict";
@@ -74,16 +75,24 @@ console.log(sampleThing);
 
   (function secondDream() {
     // const myColor = 'sapphire';
+    // @ts-ignore
     console.log(globalThis.sampleThing);
 
     (function thirdDream() {
-      //const myColor = 'emerald';
+      const myColor = 'emerald';
 
       (function fourthDream() {
-        myColor = "blue";
-        // const myColor = 'diamond';
+        // myColor = "blue";
+        const myColor = 'diamond';
+       
+       
+       
+       
+       
+       
         // komentuj po kolei idąc z tego scope odwołanie do stałem myColor - aby zobaczyć jak będzie się zachowywać
         console.log(myColor);
+        // console.log(myColor2);
       })();
     })();
   })();
@@ -97,7 +106,10 @@ console.log(sampleThing);
 // Chodzi o to że jeśli zmienna w naszym scope nazywa się tak samo jak zmienna z outer-scope.
 // Wtedy nie mamy możliwości się do niej odwołać
 
-const myVariable = 123;
+let myVariable = 123;
+
+let x = 20;
+// x = '21';
 
 function sample() {
   const myVariable = "Hello";
