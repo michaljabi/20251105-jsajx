@@ -11,6 +11,7 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Kod możesz pisać tylko w wyznaczonym do tego miejscu
  */
 
+/*
 function dressUpAccordingToWeather(weatherProvider, props) {
 	// #Reguła:
 	// Możesz pisać tylko tutaj
@@ -28,6 +29,19 @@ function dressUpAccordingToWeather(weatherProvider, props) {
 		myUser.wearing = 't-shirt'
 	}
 	return myUser
+}
+*/
+
+// Jutro: JSDoc - pokaż [TODO]
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
+function dressUpAccordingToWeather(weatherProvider = '', { name, lastName, has } = { name: '', lastName: '', has: true}) {
+	return {
+		name,
+		lastName,
+		//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator
+		wearing: weatherProvider === 'sunny' ? 't-shirt' : 'coat',
+		[has]: true
+	}
 }
 
 
