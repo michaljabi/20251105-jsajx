@@ -12,44 +12,67 @@
 // 1) Najprostszym sposobem inicjalizacji ("konstruowania") nowych obiektów będzie - wykorzystanie funkcji
 // Możemy zdefiniować tzw "factory function" która przy każdym wywołaniu - zwróci nowy obiekt.
 function makePerson() {
-	return {
-		name: 'Michał',
-		lastName: 'Kowalsky'
-	}
+  return {
+    name: "Michał",
+    lastName: "Kowalsky",
+  };
 }
+
+makePerson(); //=
+makePerson(); //=
+makePerson(); //=
+makePerson(); //=
+makePerson(); //=
+
 // Ustalając odpowiednie parametry możemy symulować działanie a'la konstruktor:
-function makePersonWith(name, lastName = 'Doe') {
-	return {
-		name,
-		lastName
-	}
+function makePersonWith(name, lastName = "Doe") {
+  return {
+    name,
+    lastName,
+    get [Symbol.toStringTag]() {
+      return "makePersonWith";
+    },
+  };
 }
+
+const personJane = makePersonWith("Jane");
+
+console.log(String(personJane));
+
+// makePersonWith("Jane"); //=
+// makePersonWith("John", "Kowalsky"); //=
+// makePersonWith("John"); //=
+// makePersonWith("John").toString(); //=
 
 // 2) Sposób kolejny to wykorzystanie słowa kluczowego `this` podczas DEKLARACJI funkcji
 // Musimy wtedy funkcję wywołać ze słowem kluczowym `new` - inaczej złe rzeczy zadzieją się w naszej aplikacji
 // Tutaj dostajemy faktyczny konstruktor - również możemy przekazywać parametry i dopisywać je do instancji
 // `this` będzie tutaj reprezentowało instancję naszego nowo tworzonego obiektu.
 function Person() {
-	 this.name = 'Michał';
-	 this.lastName = 'Kowalsky';
+  "use strict";
+  this.name = "Michał";
+  this.lastName = "Kowalsky";
 }
 
+// Person() ;
 
 // 3) Kolejny sposób to wykorzystanie lukru składniowego ze słowem kluczowym `class` - jest to najprzyjemniejsza opcja
 // Jeśli tylko możemy skorzystać z syntaksu ES6 (lub możemy transpilować kod).
 // Tutaj jeśli zapomnimy słowa kluczowego `new` przy tworzeniu instancji obiektów - zostaniemy o tym poinformowani.
 // Dodatkowo - widzimy dokładnie gdzie jest konstruktor, i w prosty sposób możemy dopisywać metody
 class MyPerson {
-	 constructor () {
-		 this.name = 'Michał';
-		 this.lastName = 'Kowalsky';
-	 }
+  constructor() {
+    this.name = "Michał";
+    this.lastName = "Kowalsky";
+  }
 }
+
+// MyPerson();
 
 // Nie jest konieczne używanie konstruktora, od jednej z wersji po ES6 deklaracja pól, może odbywać się poza konstruktorem
 class MyOtherPerson {
-	name = 'Michał';
-	lastName = 'Kowalsky';
+  name = "Michał";
+  lastName = "Kowalsky";
 }
 
 // Należy wiedzieć iż zapis 3) to tak naprawdę "lukier składniowy".
@@ -77,63 +100,65 @@ console.log(person4.constructor.name);
 // To wszystko wyjaśni się później - w momencie w którym powiemy więcej o prototypach i meta-programowaniu
 
 // Na tym etapie możemy podejrzeć łańcuch dziedziczenia:
-console.log(person1 instanceof Object)
-console.log(person4 instanceof Object, person4 instanceof MyOtherPerson)
+console.log(person1 instanceof Object);
+console.log(person4 instanceof Object, person4 instanceof MyOtherPerson);
 
 // Ponieważ funkcja "dziedziczy" swój prototyp po - Object.
 // Dodawanie pól i metod statycznych jest stosunkowo proste:
 
 // Wyobraź sobie taką sytuację:
-function Car(name = '', engine = 2.0) {
-	this.name = name;
-	this.engine = engine;
+function Car(name = "", engine = 2.0) {
+  this.name = name;
+  this.engine = engine;
 }
 Car.has4Wheels = true;
 
 // Możemy dalej przygotowywać instancje:
-const myAudi = new Car('Audi', 2.2);
-const myToyota = new Car('Toyota', 4);
+const myAudi = new Car("Audi", 2.2);
+const myToyota = new Car("Toyota", 4);
 
-console.log(myAudi)
-console.log(myToyota)
+console.log(myAudi);
+console.log(myToyota);
 
 // Klasa Car ma jednak jeszcze pole statyczne:
-console.log(Car.has4Wheels)
+console.log(Car.has4Wheels);
 
 // Na razie syntaks ES6 pozwala na dopisanie statycznych metod:
 class MyStaticClass {
-	// taki zapis pola nie jest (jeszcze) możliwy!
-	// jednak odpowiednie ustawienie transpilera (Babel) umożliwia nam taki zapis
-	// static isSuperCool = true;
+  // taki zapis pola nie jest (jeszcze) możliwy!
+  // jednak odpowiednie ustawienie transpilera (Babel) umożliwia nam taki zapis
+  // static isSuperCool = true;
 
-	// z metodą statyczną - nie ma problemu
-	static showGreetings() {
-		console.log('Hello World !')
-	}
+  // z metodą statyczną - nie ma problemu
+  static showGreetings() {
+    console.log("Hello World !");
+  }
 }
 
-MyStaticClass.showGreetings()
+MyStaticClass.showGreetings();
 
 // Możemy też wykorzystując lukier składniowy osiągnąć dziedziczenie:
 // Zapisy są podobne jak w innych językach OOP
 // Jeśli chcemy wykorzystać konstruktor klasy pochodnej musimy odwołać się do klasy bazowej jako super();
 class BaseClass {
-	constructor (name) {
-		this.name = name;
-	}
+  constructor(name) {
+    this.name = name;
+  }
 }
 
 class InheritedClass extends BaseClass {
-	constructor (name) {
-		super(name);
-	}
+  constructor(name) {
+    super(name);
+  }
 }
 
-const mySampleInstance = new InheritedClass('Moss');
+const mySampleInstance = new InheritedClass("Moss");
 console.log(mySampleInstance.name);
-console.log(mySampleInstance instanceof InheritedClass)
-console.log(mySampleInstance instanceof BaseClass)
-console.log(mySampleInstance instanceof Object)
+console.log(mySampleInstance instanceof InheritedClass);
+console.log(mySampleInstance instanceof BaseClass);
+console.log(mySampleInstance instanceof Object);
+
+console.log(mySampleInstance.toString());
 
 // W tym układzie wydaje się że mamy pełen "koszyk" funkcjonalności,
 // które swobodnie pozwalają nam pisać kodzik jako OOP (Object Oriented Programming).
@@ -155,13 +180,18 @@ console.log(person4);
 // ale również o to że można to zrobić po przez "DYNAMICZNE POLE ?!"
 
 // wygląda to następująco:
-person4['otherField'] = 'otherValue';
+person4["otherField"] = "otherValue";
 console.log(person4);
 
 // lub w wykorzystaniem stałej:
-const key = 'my-illegal-key';
-person4[key] = '😎';
+const key = "my-illegal-key";
+person4[key] = "😎";
 console.log(person4);
+console.log(person4.lastName);
+console.log(person4.age);
+console.log(person4["age"]);
+console.log(person4.otherField);
+console.log(person4["my-illegal-key"]);
 
 // Zauważ że zrobiliśmy coś co nie byłoby możliwe bez zapisu ze stringiem !!! - pole obiektu, jest teraz zapisane tak,
 // jak nie mogłoby być zadeklarowane bez String'a !!! - nie można przecież w nazwie zmiennej/stałej/w polu użyć znaku '-'
@@ -169,16 +199,16 @@ console.log(person4);
 // Po 2015 roku, możliwy jest też - zapis dający TEN SAM EFEKT - jednak już w momencie inicjalizacji obiektu,
 // Zobacz:
 const myOtherObject = {
-	['someDynamicKey']: 'value'
-}
+  ["someDynamicKey"]: "value",
+};
 console.log(myOtherObject);
 
 // lub:
-const age = 'myAge';
+const age = "myAge";
 const user = {
-	name: 'Michal',
-	[age]: 30
-}
+  name: "Michal",
+  [age]: 30,
+};
 console.log(user);
 
 // Owszem, nikt nie chce sobie życia utrudniać i stosować takiego zapisu,
@@ -193,13 +223,13 @@ console.log(user);
 
 // przykład legalnego zapisu:
 const arrayLike = {
-	0: 'Hello',
-	1: 'World',
-	2: 'of',
-	3: 'JavaScript',
-	4: '!',
-	length: 5
-}
+  0: "Hello",
+  1: "World",
+  2: "of",
+  3: "JavaScript",
+  4: "!",
+  length: 5,
+};
 
 // takie odniesienie się do pola, nie jest możliwe:
 // console.log(arrayLike.0)
