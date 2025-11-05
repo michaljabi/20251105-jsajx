@@ -1,5 +1,10 @@
 import { assertThat } from '../../j4b1-assert.js'
-import  mySecretConstant, { assertThat as aT }  from './a20-1st-helper.js'
+import  mySecretConstantButIDecideHowToNameIt, { assertThat as aT, mySecretConstant }  from './a20-1st-helper.js'
+import  * as collected  from './a20-1st-helper.js'
+
+console.log(mySecretConstantButIDecideHowToNameIt)
+console.log(collected)
+
 /**
  * a20-import-export-variants
  * Warm up
