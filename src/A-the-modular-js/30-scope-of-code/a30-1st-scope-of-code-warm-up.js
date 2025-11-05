@@ -16,6 +16,7 @@ function computeFullName() {
 
   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
   fullName = `${firstName} ${lastName}`
+  // fullName = [firstName, lastName].join(' ');
 }
 
 computeFullName();
