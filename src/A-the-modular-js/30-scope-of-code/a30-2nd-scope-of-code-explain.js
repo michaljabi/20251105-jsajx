@@ -1,3 +1,7 @@
+import { toSecondPower } from "../20-import-export-variants/a20-challenge-project/main/utils/some-util";
+
+//"use strict";
+toSecondPower(9); //=
 /**
  * a30-scope-of-code
  * Explain
@@ -27,19 +31,21 @@
 	Dla przypomnienia w przeglądarce to: window
 */
 
-// a) Module Global SCOPE
-const model = 'Q2'
+// a) Module SCOPE
+const model = "Q2";
 
-function mySuperCar () {
-	// b) local SCOPE of (mySuperCar)
+function mySuperCar() {
+  // b) local SCOPE of (mySuperCar)
 
-	function getName() {
-		return 'Audi'
-	}
+  function getName() {
+    // c) local SCOPE of (getName)
+    console.log(model);
+    return "Audi";
+  }
 
-	console.log('Moje super auto to:')
-	console.log(getName())
-	console.log(model)
+  console.log("Moje super auto to:");
+  console.log(getName());
+  console.log(model);
 }
 
 mySuperCar();
@@ -48,29 +54,39 @@ mySuperCar();
 // Pytanie nr1. ok, to co się stanie, jeśli zagnieżdżeń jest więcej
 // Dla szybkiego wykonania przykładu — wykorzystamy IFEE:
 
-
-
 // Dla porządku: każda z tych funkcji mogłaby być anonimowa (nienazwana).
 // tutaj jest to zrobione, aby łatwiej było określić, gdzie się znajdujemy.
 // W rzeczywistym kodzie raczej nie spotkamy takich konstrukcji (😅).
 // Służy ona wyłączenie sprawdzeniu, jak zachowuje się przeszukiwanie scope w JS.
-const myColor = 'red';
+// const myColor = 'red';
+// let myColor;
+
+console.log(globalThis);
+
+// const myColor = 'red';
+
+// ZAWSZE używaj słowa kluczowego przed deklarowaniem zmiennej.
+let sampleThing = 20;
+
+console.log(sampleThing);
 (function inception() {
-	const myColor = 'cristal';
+  // const myColor = 'cristal';
 
-	(function secondDream() {
-		const myColor = 'sapphire';
+  (function secondDream() {
+    // const myColor = 'sapphire';
+    console.log(globalThis.sampleThing);
 
-		(function thirdDream() {
-			const myColor = 'emerald';
+    (function thirdDream() {
+      //const myColor = 'emerald';
 
-			(function fourthDream() {
-				const myColor = 'diamond';
-				// komentuj po kolei idąc z tego scope odwołanie do stałem myColor - aby zobaczyć jak będzie się zachowywać
-				console.log(myColor);
-			})()
-		})();
-	})();
+      (function fourthDream() {
+        myColor = "blue";
+        // const myColor = 'diamond';
+        // komentuj po kolei idąc z tego scope odwołanie do stałem myColor - aby zobaczyć jak będzie się zachowywać
+        console.log(myColor);
+      })();
+    })();
+  })();
 })();
 
 // Przykład powyżej ukazuje jak JavaScript przeszukuje outer-scope jeśli nie znajdzie lokalnej zmiennej lub stałej,
@@ -84,31 +100,38 @@ const myColor = 'red';
 const myVariable = 123;
 
 function sample() {
-	const myVariable = 'Hello';
-	console.log(myVariable);
-	// Nie mam jak dostać się do outer scope
-	// Musiałbym zmienić nazwę lokalnej zmiennej.
+  const myVariable = "Hello";
+  console.log(myVariable);
+  // Nie mam jak dostać się do outer scope
+  // Musiałbym zmienić nazwę lokalnej zmiennej.
 
-	// Jedno z pośrednich rozwiązań jak odnaleźć takie miejsca w kodzie:
-	// ESLint - Linter do JavaScript
-	// https://eslint.org/
-	// i jego reguła: no-shadow
-	// https://eslint.org/docs/rules/no-shadow
+  // Jedno z pośrednich rozwiązań jak odnaleźć takie miejsca w kodzie:
+  // ESLint - Linter do JavaScript
+  // https://eslint.org/
+  // i jego reguła: no-shadow
+  // https://eslint.org/docs/rules/no-shadow
 }
 
 sample();
 
-
 // DANGER ZONE:
 // O tym jeszcze będzie mowa, jednak można zupełnie przypadkowo zadeklarować zmienną w global scope:
 function findMyNewMug() {
-	// "use strict"; // odkomentuj w odpowiednim momencie
-	myMug = 'Moss sticker attached to bottom.'
-	// Zmienna myMug nie była zadeklarowana w outer scope...
-	// Co za tym idzie nie powinniśmy mieć możliwości jej nadpisania,
-	// Jednak co się okazuje:
-	console.log(myMug);
-	// kod działa
+// jeżeli kod jest uruchomiony w "stict mode" - to dostaniemy oczekiwany error, a myMug nie wycieknie do global scope!	
+  "use strict"; // odkomentuj w odpowiednim momencie
+
+
+  // o tym będzie później, 2 element naprawiony w "strict mode":
+  console.log(this);
+
+  myMug = "Moss sticker attached to bottom.";
+  // Zmienna myMug nie była zadeklarowana w outer scope...
+  // Co za tym idzie nie powinniśmy mieć możliwości jej nadpisania,
+  // Jednak co się okazuje:
+  console.log(myMug);
+
+
+  // kod działa
 }
 findMyNewMug();
 
