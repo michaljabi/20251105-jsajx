@@ -17,8 +17,34 @@ import { assertThat } from "../../j4b1-assert.js";
 var myValue = 2000;
 console.log("Current value is", myValue);
 
-var myValue = 3000;
-console.log("Current value is", myValue);
+
+
+const o = 1
+run();
+
+// Function declaration (deklaracja funkcji)
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function#difference_between_function_constructor_and_function_declaration
+function run() {
+  var myValue = 3000
+  console.log("Current value is", o, myValue);
+}
+
+// Function expression (wyrażenie funkcyjne - ANONIMOWE - może być ARROW)
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+const myRun = () => {
+  var myValue = 3000;
+  console.log("Current value is", myValue);
+};
+myRun()
+
+// IIFE - 1 sposób na uzyskanie modułowości w JS.
+// https://developer.mozilla.org/en-US/docs/Glossary/IIFE
+;(() => {
+  var myValue = 3000;
+  console.log("Current value is", myValue);
+})();
+
+// console.log(myValue);
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
