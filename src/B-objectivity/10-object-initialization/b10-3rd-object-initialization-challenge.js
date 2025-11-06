@@ -34,7 +34,7 @@ function dressUpAccordingToWeather(weatherProvider, props) {
 
 // Jutro: JSDoc - pokaż [TODO]
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
-function dressUpAccordingToWeather(weatherProvider = '', { name, lastName, has } = { name: '', lastName: '', has: true}) {
+function dressUpAccordingToWeather(weatherProvider = '', { name, lastName, has } = { name: '', lastName: '', has: 'item'}) {
 	return {
 		name,
 		lastName,
