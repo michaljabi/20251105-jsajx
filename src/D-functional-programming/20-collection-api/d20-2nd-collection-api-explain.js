@@ -97,6 +97,8 @@ console.log(theItGuy.myName)
 
 // Sprawdzenie czy dany klucz istnieje w Mapie:
 myRealMap.has('myName') //=
+// odczytujemy wartość:
+myRealMap.get( 'myName' ) //=
 
 // Wrzucenie nowej wartości do mapy:
 myRealMap.set('name', 'James') //=
@@ -106,6 +108,8 @@ myRealMap.size //=
 
 const myRealSet = new Set();
 
+
+
 myRealSet.add( 'apple' );
 myRealSet.add( 'cherry' );
 myRealSet.add( 'banana' );
@@ -113,6 +117,9 @@ myRealSet.add( 'banana' );
 myRealSet.add( 'banana' );
 myRealSet.add( 'cherry' );
 myRealSet.add( 'mango' );
+
+// Array.from(myRealSet)[0] //=
+
 
 console.log( myRealSet );
 
@@ -142,3 +149,16 @@ myRealSet.add('strawberry') //=
 
 // Ilość elementów w secie:
 myRealSet.size //=
+
+
+
+const myObjects = new Set([{},{},{}]);
+console.log(myObjects.size);
+console.log(myObjects);
+
+const o = {};
+const o1 = o;
+const o2 = o1;
+const myObjects2 = new Set([o, o1, o2]);
+console.log(myObjects2.size);
+console.log(myObjects2);
