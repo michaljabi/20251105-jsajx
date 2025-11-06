@@ -1,5 +1,5 @@
 import { assertThat } from '../../j4b1-assert.js'
-
+// @ts-check
 /**
  * b10-object-initialization
  * Challenge
@@ -31,9 +31,25 @@ function dressUpAccordingToWeather(weatherProvider, props) {
 	return myUser
 }
 */
+/**
+ * @typedef {DressedPerson}
+ * @property {string} name
+ * @property {string} lastName
+ * @property {string} wearing
+ * @property {true} `[has]` ?
+ */
 
 // Jutro: JSDoc - pokaż [TODO]
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
+/**
+ * @param {string} weatherProvider 
+ * @param {Object} [props={}] 
+ * @param {string} [props.name='']
+ * @param {string} [props.lastName=''] 
+ * @param {string} [props.has='item'] 
+ * @returns {DressedPerson} 
+ * 
+ */
 function dressUpAccordingToWeather(weatherProvider = '', { name, lastName, has } = { name: '', lastName: '', has: 'item'}) {
 	return {
 		name,
