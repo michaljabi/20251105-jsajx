@@ -23,8 +23,14 @@ class ShowDepartment {
 	}
 
 	sayNameAfter(seconds = 2) {
+	    console.log(this);
+
+		// przed `2015`
+		const that = this;
 		setTimeout(function () {
-			const result = 'This is' + this.printMyName()
+		// setTimeout(() => { // arrow function + this normalnie po 2015;
+			console.log(that);
+			const result = 'This is ' + that.printMyName()
 			console.log(result)
 			// ten kod poniżej jest potrzebny tylko dla testu (nie zmieniaj go):
 			testSpy = result;
@@ -37,6 +43,7 @@ class ShowDepartment {
 // Nie możesz zmieniać kodu poniżej:
 const department = new ShowDepartment();
 department.sayNameAfter(2);
+department.printMyName() //=
 
 assertThat(
 	'department name',

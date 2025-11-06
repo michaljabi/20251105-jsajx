@@ -20,6 +20,8 @@ function sayYourName() {
   return this.fullName;
 }
 
+// sayYourName()
+
 const bindedThis = sayYourName.bind({ fullName: "Always Michał" });
 
 // Arrow function jest NIEWRAŻLIWE na kontekst,
