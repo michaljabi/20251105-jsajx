@@ -9,6 +9,11 @@ import { assertThat } from '../../j4b1-assert.js'
 const person = {
 	// #Reguła:
 	// Kodzik można pisać tylko tutaj w środku.
+	name: 'Janusz',
+	lastName: 'Kowalski',
+	email() {
+		return ([this.name, this.lastName].join('.') + '@workload.com').toLowerCase()
+	}
 }
 
 // #Reguła:
@@ -19,12 +24,12 @@ assertThat(
 )  //=
 assertThat(
 	'Person email should be janusz.kowalski@workload.com',
-	expect => expect(person.email).toBe('janusz.kowalski@workload.com')
+	expect => expect(person.email()).toBe('janusz.kowalski@workload.com')
 )  //=
 // Po zmianie imienia i nazwiska powinien zmienić się email:
 person.name = 'Grażyna';
 person.lastName = 'Nowak';
 assertThat(
 	'Person email from now - should be grażyna.nowak@workload.com',
-	expect => expect(person.email).toBe('grażyna.nowak@workload.com')
+	expect => expect(person.email()).toBe('grażyna.nowak@workload.com')
 )  //=
