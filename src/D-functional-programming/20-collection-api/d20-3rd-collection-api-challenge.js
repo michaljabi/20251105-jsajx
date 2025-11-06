@@ -48,6 +48,7 @@ function longComputation(fromNumber) {
   return result;
 }
 
+
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
 
