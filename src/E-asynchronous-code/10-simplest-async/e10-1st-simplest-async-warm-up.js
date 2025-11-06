@@ -12,6 +12,10 @@ import { assertThat, fireCount } from '../../j4b1-assert.js'
  * - możesz modyfikować parametry funkcji
  * - możesz dopisywać nowy kod
  */
+// TODO przed jutrem (fajnie by było):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+// lub na YouTube:
+// https://www.youtube.com/watch?v=FtdM3LIUXx4
 
 function getTheRefund(refundFn) {
 	const totalRefund = 300;
