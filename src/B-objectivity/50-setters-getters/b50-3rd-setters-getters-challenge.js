@@ -24,13 +24,22 @@ const vintageCuckooClock = {
 	minutes: 11,
 	seconds: 44,
 	get lcdTime() {
-		return [this.hours, this.minutes, this.seconds].join(':')
+		const {hours, minutes, seconds} = this;
+		return [hours, minutes, seconds].join(':')
 	},
+	/*
 	set lcdTime(value) {
 		const numbers = value.split(':');
 		this.hours = Number(numbers[0]);
 		this.minutes = Number(numbers[1]);
 		this.seconds = Number(numbers[2]);
+	},
+	*/
+	set lcdTime(value) {
+		const [h,m,s] = value.split(':').map(Number);
+		this.hours = h;
+		this.minutes = m;
+		this.seconds = s;
 	}
 }
 
