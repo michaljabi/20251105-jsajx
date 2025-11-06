@@ -56,3 +56,23 @@ u = { age: 10 /*, address: {}*/ };
 console.log(addName(u));
 
 console.log(u);
+
+
+
+// Deep copy
+const user = { address: {} };
+
+// Probem z Shalow:
+const userShallow = {...user};
+
+console.log(user === userShallow);
+console.log(user.address === userShallow.address);
+
+
+// Najprostrzy sposób klonowania:
+// https://developer.mozilla.org/en-US/docs/Glossary/Deep_copy
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone
+const userDeep = structuredClone(user);
+
+console.log(user === userDeep);
+console.log(user.address === userDeep.address);
