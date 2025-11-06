@@ -26,11 +26,41 @@ const backendApiRequest = () => [
 ];
 const emailData = backendApiRequest();
 
-// Tutaj możesz pisać:
-const showNamesOnly = emailData;
-const showWomanNamesOnly = emailData;
-const showEmailsWithDomainSiteCom = emailData;
+const isEmailEndWithSiteCom = email => email.toLowerCase().endsWith('@site.com');
+const isAWomanName = name => name.toLowerCase().endsWith('a');
 
+const extractName = email => {
+	const [name] = email.split('@')
+	return name
+}
+
+const capitlize = word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+
+
+console.log('HELLO')
+console.log('HELLO'[1]);
+console.log(''[0]);
+console.log(''.charAt(0));
+
+console.log(isAWomanName('Michał'))
+console.log(isAWomanName('Anna'))
+
+// Tutaj możesz pisać:
+const showNamesOnly = emailData.map(extractName).map(capitlize);
+console.log(showNamesOnly)
+
+const showWomanNamesOnly = showNamesOnly.filter(isAWomanName);
+const showEmailsWithDomainSiteCom = emailData.filter((email) => {
+	console.log(email)
+	return email.endsWith('@site.com');
+});
+// const showEmailsWithDomainSiteCom = emailData.filter(isEmailEndWithSiteCom);
+
+console.log(showEmailsWithDomainSiteCom)
+
+const myName = 'adrian@site.com';
+
+myName.split('@')[0] //=
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
@@ -48,3 +78,7 @@ assertThat(
 	'Third component should have @site.com emails as data provided',
 	expect => expect(showEmailsWithDomainSiteCom).toEqual(['adrian@site.com','stefan@site.com','anna@site.com'])
 )  //=
+
+
+// tablica bazowa jest nietknięta:
+console.log(emailData);
