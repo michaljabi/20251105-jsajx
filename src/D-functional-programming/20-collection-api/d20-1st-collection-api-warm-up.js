@@ -11,7 +11,34 @@ import { assertThat } from '../../j4b1-assert.js'
  */
 
 const numbers = [10, 20, 30, 2, 2, 2, 30, 20, 2, 10, 8, 9, 0];
-const distinctNumbers = numbers
+// rozwiązanie to tablica: [10,20,30,2,8,9,0];
+
+const distinctNumbers = numbers.filter(distinct());
+// rozwiązanie nr2:
+// const distinctNumbers = numbers.filter(distinct());
+
+// rozwiązanie nr1 imperatywne (w kontraście do deklaratywnego)
+/*
+const cache = [];
+for(const no of numbers) {
+	if(!cache.includes(no)) {
+		cache.push(no);
+		distinctNumbers.push(no)
+	}
+}
+*/
+
+// rozwiązanie deklaratywne -> programowanie funkcyjne:
+function distinct() {
+	const cache = [];
+	return (no) => {
+		if(!cache.includes(no)) {
+			cache.push(no);
+			return true;
+		}
+		return false;
+	}
+}
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
