@@ -14,6 +14,23 @@ import { assertThat } from "../../j4b1-assert.js";
 // vs
 // arrow function expression - wpięte w obiekt
 
+function sayYourName() {
+  "use strict";
+  console.log(this);
+  return this.fullName;
+}
+
+const bindedThis = sayYourName.bind({ fullName: "Always Michał" });
+
+// Arrow function jest NIEWRAŻLIWE na kontekst,
+// pod `this` będzie to co jest w miejscu definiowania funkcji
+const sayMyName = () => this.fullName;
+/*
+const sayMyName = () => { 
+	return { name: 'ok' }
+} ;
+ */
+
 const personJen = {
   fullName: "Jen Barber",
   profession: "IT Manager",
@@ -30,19 +47,30 @@ const personJen = {
   // w JS NIE MA tzw. "przeciążenia", metod czy konstuktorów, a w poniższym przypadku,
   // nie ma błędu, ale "ostatni wygrywa" i pole fullName będzie nadpisane wartością "John Barber"
   // fullName: "John Barber",
-  sayYourName() {
+  // rozwiązanie nr1:
+  /*sayYourName() {
 	//console.log(this);
     return this.fullName;
-  },
+  },*/
+  sayYourName,
+  sayMyName,
+  bindedThis,
 };
+
+// to nie zadziała
+// console.log(personJen.sayMyName());
 
 const personRoy = {
   fullName: "Roy Trenneman",
   profession: "The IT Guy",
+  /*
   sayYourName() {
 	//console.log(this);
     return this.fullName;
   },
+  */
+  sayYourName,
+  bindedThis,
 };
 
 // #Reguła:
@@ -53,3 +81,8 @@ assertThat("Jen should be able to introduce herself", (expect) =>
 assertThat("Roy should be able to introduce himself", (expect) =>
   expect(personRoy.sayYourName()).toBe("Roy Trenneman")
 ); //=
+
+personJen.bindedThis(); //=
+personRoy.bindedThis(); //=
+
+bindedThis() //= 
