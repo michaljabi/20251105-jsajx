@@ -1,4 +1,4 @@
-import { assertThat } from '../../j4b1-assert.js'
+import { assertThat } from "../../j4b1-assert.js";
 /**
  * b20-what-is-this
  * Warm up
@@ -10,23 +10,46 @@ import { assertThat } from '../../j4b1-assert.js'
  * - Postaraj się zastosować zasadę "DRY" - Don't Repeat Yourself
  */
 
+// jest różnica w this, z function expression - wpięte w obiekt
+// vs
+// arrow function expression - wpięte w obiekt
+
 const personJen = {
-	fullName: 'Jen Barber',
-	profession: 'IT Manager'
-}
+  fullName: "Jen Barber",
+  profession: "IT Manager",
+  /*
+  // zapisy poniżej znaczą TO SAMO
+  sayYourName: function () {
+    return this.fullName;
+  },
+  // ten zapis to tzw. LUKIER składniowy (nowa froma zapisu metod po 2015)
+  sayYourName() {
+    return this.fullName;
+  },
+  */
+  // w JS NIE MA tzw. "przeciążenia", metod czy konstuktorów, a w poniższym przypadku,
+  // nie ma błędu, ale "ostatni wygrywa" i pole fullName będzie nadpisane wartością "John Barber"
+  // fullName: "John Barber",
+  sayYourName() {
+	//console.log(this);
+    return this.fullName;
+  },
+};
 
 const personRoy = {
-	fullName: 'Roy Trenneman',
-	profession: 'The IT Guy'
-}
+  fullName: "Roy Trenneman",
+  profession: "The IT Guy",
+  sayYourName() {
+	//console.log(this);
+    return this.fullName;
+  },
+};
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
-assertThat(
-	'Jen should be able to introduce herself',
-	expect => expect(personJen.sayYourName()).toBe('Jen Barber')
-)  //=
-assertThat(
-	'Roy should be able to introduce himself',
-	expect => expect(personRoy.sayYourName()).toBe('Roy Trenneman')
-)  //=
+assertThat("Jen should be able to introduce herself", (expect) =>
+  expect(personJen.sayYourName()).toBe("Jen Barber")
+); //=
+assertThat("Roy should be able to introduce himself", (expect) =>
+  expect(personRoy.sayYourName()).toBe("Roy Trenneman")
+); //=
