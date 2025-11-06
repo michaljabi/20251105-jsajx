@@ -35,11 +35,15 @@ const vintageCuckooClock = {
 		this.seconds = Number(numbers[2]);
 	},
 	*/
+	/*
 	set lcdTime(value) {
 		const [h,m,s] = value.split(':').map(Number);
 		this.hours = h;
 		this.minutes = m;
 		this.seconds = s;
+	}*/
+	set lcdTime(value) {
+		[this.hours,this.minutes,this.seconds ] = value.split(':').map(Number);
 	}
 }
 
