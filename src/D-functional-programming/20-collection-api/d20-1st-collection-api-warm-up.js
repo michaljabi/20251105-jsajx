@@ -13,7 +13,11 @@ import { assertThat } from '../../j4b1-assert.js'
 const numbers = [10, 20, 30, 2, 2, 2, 30, 20, 2, 10, 8, 9, 0];
 // rozwiązanie to tablica: [10,20,30,2,8,9,0];
 
-const distinctNumbers = numbers.filter(distinct());
+// rozwiązanie nr3: one liner, albo Array.from albo [...[]]
+// const distinctNumbers = Array.from(new Set(numbers));
+const distinctNumbers = [...new Set(numbers)];
+console.log(distinctNumbers)
+
 // rozwiązanie nr2:
 // const distinctNumbers = numbers.filter(distinct());
 
