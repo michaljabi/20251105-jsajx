@@ -30,6 +30,7 @@ String.prototype.capitalize = function() {
 	return stringHelper.capitalize(this);
 }
 
+
 // Uwaga w języku skryptowym, możesz popsuć referencje do Natywnych obiektów i klas.
 // Math = {};
 

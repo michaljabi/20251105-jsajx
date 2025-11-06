@@ -135,6 +135,11 @@ class MyStaticClass {
   }
 }
 
+const myInstanceS = new MyStaticClass();
+
+// NIE masz metody bo jest "static" dopięte do showGreetings, więc metoda ta NIE NALEŻY do instancji
+// myInstanceS.showGreetings()
+
 MyStaticClass.showGreetings();
 
 // Możemy też wykorzystując lukier składniowy osiągnąć dziedziczenie:
@@ -235,3 +240,5 @@ const arrayLike = {
 // console.log(arrayLike.0)
 // jednak możemy się dostać do wartości następująco:
 console.log(arrayLike[0], arrayLike[1]);
+
+console.log(arrayLike.toString())
