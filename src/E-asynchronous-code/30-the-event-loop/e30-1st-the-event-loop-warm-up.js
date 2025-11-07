@@ -15,8 +15,9 @@ const collector = [];
 
 collector.push(1);
 
-
+Promise.resolve().then(() => {
 collector.push(3);
+})
 
 
 collector.push(2);
@@ -34,9 +35,9 @@ const secondCollector = [];
 
 secondCollector.push(1);
 
-
-secondCollector.push(3);
-
+setTimeout(() => {
+	secondCollector.push(3);
+})
 
 secondCollector.push(2);
 
@@ -46,3 +47,8 @@ queueMicrotask(() => {
 			expect => expect(secondCollector).toEqual([1, 2])
 		) //=
 	})
+
+console.log(secondCollector);
+setTimeout(() => {
+	console.log(secondCollector);
+})
