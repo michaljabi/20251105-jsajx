@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ state.greeting }}</h1>
+      <p>Counter: <strong>{{ state.count }}</strong></p>
+      <button @click="increment">Click me!</button>
+    </div>
+    <script type="module">
+      // musiałem dodać /dist/vue.esm-browser.js żeby działało w przeglądarce (JIT -> Just In Time)
+      import { createApp } from "https://esm.sh/vue/dist/vue.esm-browser.js";
+
+      createApp({
+        data() {
+          return {
+            // Opakowałem dane w dodatkowy obiekt "state", tedy będzie widoczne `Proxy` w konsoli
+            state: {
+              greeting: "Hello from Vue 3 + esm.sh!",
+              count: 0,
+            },
+          };
+        },
+        methods: {
+          increment() {
+            this.state.count++;
+            // Zauważ w co opakowany jest obiekt "state"
+            console.log(this.state);
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
