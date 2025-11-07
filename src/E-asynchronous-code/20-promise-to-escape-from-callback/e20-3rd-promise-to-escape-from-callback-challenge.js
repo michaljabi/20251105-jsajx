@@ -17,7 +17,10 @@ const DZej = {
 	getJSON(url) {
 		// #Reguła:
 		// Kodzik można pisać i zmieniać tylko w tym bloku.
-		// return Promise.resolve('')
+		if(url.endsWith('/it')) {
+			return Promise.resolve({ message: 'did you try?' })
+		}
+		return Promise.reject({status: 404, message: 'Invalid URL!'})
 	}
 }
 
