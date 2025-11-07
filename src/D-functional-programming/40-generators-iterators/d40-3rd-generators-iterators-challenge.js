@@ -10,12 +10,34 @@ import { assertThat } from '../../j4b1-assert.js'
 
 class GuestList {
 
-	signGuest(name, lastName) {}
+	guests = [];
+
+	signGuest(name, lastName) {
+		this.guests.push({name, lastName })
+	}
+
+	helloList() {}
+
+	// Jeśli wrzucisz instancję GuestList do pętli for, to wtedy zobaczysz imiona.
+	*[Symbol.iterator]() {
+		for(const guest of this.guests) {
+			yield guest.name
+		}
+	}
 }
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
 const myGuests = new GuestList();
+
+console.log(myGuests)
+console.log(myGuests.guests)
+
+// Przepis na sprawdzenie propery, methods i "symbols" na intancji klasy
+console.log(Object.getOwnPropertyNames(myGuests));
+console.log(Object.getOwnPropertyNames(myGuests.constructor.prototype));
+console.log(Object.getOwnPropertyNames(GuestList.prototype));
+console.log(Object.getOwnPropertySymbols(GuestList.prototype));
 
 myGuests.signGuest('Jane', 'Doe');
 myGuests.signGuest('Joe', 'Doe');
@@ -24,9 +46,9 @@ myGuests.signGuest('Janina', 'Doe');
 
 const collector = [];
 // odkomentuj poniższy blok, kiedy będzie już implementacja:
-// for(const guestName of myGuests) {
-// 	collector.push(guestName);
-// }
+for(const guestName of myGuests) {
+	collector.push(guestName);
+}
 
 // #Reguła:
 // Nie możesz zmieniać kodu poniżej:
@@ -42,3 +64,16 @@ assertThat(
 	'collector should have all the names from GuestList',
 	expect => expect(collector).toEqual(['Jane','Joe','Jan','Janina'])
 )  //=
+
+
+const planeObject = {
+	guests: [],
+	signGuest() {},
+	*[Symbol.iterator]() { yield 20 },
+	0: 'arrayLike',
+	[Symbol()]: 'test'
+}
+
+console.log(planeObject[0])
+//tizzer: Symbol! zachowuje się inaczej niż nam się wydaje.... TODO.
+console.log(planeObject[Symbol()])
