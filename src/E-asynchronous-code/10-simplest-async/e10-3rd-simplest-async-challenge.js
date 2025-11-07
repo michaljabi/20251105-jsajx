@@ -28,6 +28,14 @@ const DZej = {
 	getJSON(url, callback) {
 		// #Reguła:
 		// Kodzik można pisać i zmieniać tylko w tym bloku.
+		console.log(url)
+		if(url.endsWith('/it')) {
+			// ok
+			callback({ message: 'did you try?' }, null)
+		} else {
+			// error
+			callback(null, {status: 404, message: 'Invalid URL!'})
+		}
 	}
 }
 
