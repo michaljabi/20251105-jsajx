@@ -10,10 +10,13 @@ import { assertThat } from '../../j4b1-assert.js'
  */
 
 let name = '';
-Promise.resolve('Roy')
+Promise.resolve('Roy').then((n) => name = n)
 
 let lastName = '';
-Promise.reject('Trenneman')
+Promise.reject('Trenneman').catch(e => {
+	console.log(e);
+	lastName = e;
+})
 
 // #Reguła:
 // Nie można zmieniać kodu poniżej:
