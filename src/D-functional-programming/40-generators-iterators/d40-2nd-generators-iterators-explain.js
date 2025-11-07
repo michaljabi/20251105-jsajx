@@ -31,23 +31,24 @@ for(const [key, value] of new Map([['id-1', 'HOT'], ['id-2', 'COFFEE'], ['id-1',
 // Funkcje które mają możliwość "zatrzymania" swojego wykonania i zwrócenia wartości.
 
 function *generate4Numbers() {
+	console.log('?')
 	yield 100;
 	yield 200;
 	yield 300;
 	yield 400;
+	yield 500;
+}
+
+for(const num of generate4Numbers()) {
+	console.log(num)
 }
 
 // Na początek potraktujmy generator jako standardową funkcję:
-generate4Numbers() //=
+//generate4Numbers() //=
 
 // Widać że zwrócona wartość to iterator, a nie - jakbyśmy się mogli spodziewać - wartość np. 100.
 // Żeby wyciągnąć kolejne wartości trzeba odnieść się do API dla iteratora
 // Dokładnie wyciągamy to metodą .next()
-
-// Zobaczmy więc:
-generate4Numbers().next() //=
-generate4Numbers().next() //=
-generate4Numbers().next() //=
 
 // Ok, dostajemy wartość w formacie obiektu z flagą `done` oraz nasze upragnione `value`
 // Jednak coś jest nie tak... dostajemy cały czas 1 wartość a nie kolejne ?!
@@ -55,13 +56,33 @@ generate4Numbers().next() //=
 // W tym układzie mamy nowy wskaźnik na iterator - a on zaczyna iterację "od początku"
 // Żeby wyciągnąć numery po kolei - musimy skorzystać z tego samego wskaźnika:
 
+/*
+Iterator w JS to konstukcja która:
+- ma metodę  next() 
+- nie da się jej cofnąć
+- daje obiekt  {done: boolean, value: T}  gdzie T to typ zwracanego obiektu
+*/
 const iterator = generate4Numbers();
 iterator.next() //=
-iterator.next() //=
-iterator.next() //=
-iterator.next() //=
-iterator.next() //=
-iterator.next() //=
+setTimeout(() => {
+	iterator.next() //=
+	iterator.next() //=
+	iterator.next() //=
+	iterator.next() //=
+	iterator.next() //=
+}, 2000)
+
+// to nie zadziała bo romimy nowe referencje:
+generate4Numbers().next() //=
+generate4Numbers().next() //=
+generate4Numbers().next() //=
+generate4Numbers().next() //=
+generate4Numbers().next() //=
+
+// dobre podejście:
+const iterator2 = generate4Numbers();
+iterator2.next() //=
+iterator2.next() //=
 
 // Super, teraz działa tak jak powinno. Na sam koniec - jak nie ma już wartości pod yield - dostajemy
 // { value: undefined, done: true }
@@ -74,9 +95,7 @@ iterator.next() //=
 
 // Jednak, skoro Generator - zwraca iterator, to można go potraktować jako
 // Kolekcja iterowalna !!!:
-for(const num of generate4Numbers()) {
-	console.log(num)
-}
+
 
 // Sposób odnoszenia się po przez next() do iteratora, powoduje pewną zależność
 // Możemy wyciągnąć ten sam INTERFEJS przechodzenia po obiektach z dowolnej kolekcji po której da się iterować:
@@ -166,6 +185,18 @@ numIterator.next() //=
 numIterator.next() //=
 numIterator.next() //=
 numIterator.next() //=
+numIterator.next() //=
+numIterator.next() //=
+numIterator.next() //=
+numIterator.next() //=
+numIterator.next() //=
+numIterator.next() //=
+numIterator.next() //=
+numIterator.next() //=
+numIterator.next() //=
+
+// randomUUID:
+// crypto.randomUUID() //=
 
 // ...(), ...(), ...()
 
@@ -182,7 +213,7 @@ const myUser = {
 // Jednak z pomocą i implementacją Symbol.iterator + generator:
 const myIterableUser = {
 	name: 'Roy',
-	fruits: ['apples', 'mangoes', 'cherries'],
+	fruits: ['apples', 'mangoes', 'cherries', 'strawberry', 'banana'],
 	// Możemy określić co ma się dziać po wrzuceniu obiektu do pętli for:
 	*[Symbol.iterator]() {
 		 for(const fruit of this.fruits) {
@@ -194,3 +225,10 @@ const myIterableUser = {
 for(const sth of myIterableUser) {
 	console.log(sth)
 }
+
+const iterAtor = myIterableUser[Symbol.iterator]();
+
+iterAtor.next()  //=
+iterAtor.next()  //=
+iterAtor.next()  //=
+iterAtor.next()  //=
