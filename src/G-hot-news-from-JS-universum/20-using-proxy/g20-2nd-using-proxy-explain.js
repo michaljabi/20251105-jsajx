@@ -24,9 +24,13 @@ console.log(person);
 
 const myTroll = new Proxy(person, {
 	get ( target, propertyKey ) {
-		// console.log(propertyKey)
+		console.log(propertyKey)
 		// console.log(target[propertyKey])
-		return 'TROLL'
+		// TUTAJ mamy informację że ktoś odczytuje pole obiektu
+		if(target[propertyKey] === undefined) {
+			return '';
+		}
+		return target[propertyKey]
 	}
 })
 

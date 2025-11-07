@@ -3,8 +3,13 @@
  * */
 
 const person = {
-	name: 'Michał'
+	name: 'Michał',
+	sample: undefined
 }
+
+console.log(Reflect.has(person, 'sample'));
+console.log("sample" in person);
+
 
 function loggerFactory(object) {
 
