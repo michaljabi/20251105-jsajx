@@ -24,7 +24,7 @@ console.log(Symbol() === Symbol())
 try {
 	new Symbol();
 } catch ( e ) {
-	console.log(e);
+	console.log(e.message);
 }
 
 // Tak więc wywołanie Symbol() - to globalna "factory function" dla symboli.
@@ -44,13 +44,14 @@ console.log(Symbol('ok') === Symbol('ok'))
 // Jednak nie jest to oczywiste - i raczej nikt nie będzie ruszał naszego pola
 
 // W swoim scope, zrobilibyśmy stałą "salary" pod którą ukryjemy symbol
-const salary = Symbol();
+const salary = Symbol('salarySymbol');
 const myUser = {
 	name: 'Roy',
 	// symbol z salary posłuży nam do zrobienia pola na obiekcie:
 	[salary]: 3000
 }
 // w prywatnym scope:
+myUser[salary] = 5000;
 console.log(myUser[salary])
 
 // TYMCZASEM NA ZEWNĄTRZ:
