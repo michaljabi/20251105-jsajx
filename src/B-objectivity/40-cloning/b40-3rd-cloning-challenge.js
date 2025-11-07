@@ -1,4 +1,4 @@
-import { assertThat } from '../../j4b1-assert.js'
+import { assertThat } from "../../j4b1-assert.js";
 /**
  * b40-cloning
  * Challenge
@@ -24,32 +24,45 @@ import { assertThat } from '../../j4b1-assert.js'
  */
 
 const initialTypeState = {
-	paragraphTextContent: ''
-}
+  paragraphTextContent: "",
+};
 
 // Funkcja obliczająca stan następny na podstawie stanu poprzedniego
-function calculateNewParagraphState(currentState = initialTypeState, paragraphText = '') {
-	  currentState.paragraphTextContent += paragraphText;
-	  return currentState;
+// (tutaj działa to jako tzw. Reducer -> z biblioteki Redux)
+function calculateNewParagraphState(
+  currentState = initialTypeState,
+  paragraphText = ""
+) {
+  const stateCopy = { ...currentState };
+  stateCopy.paragraphTextContent += paragraphText;
+  return stateCopy;
 }
 
 // Nasza symulacja pisania czegoś przez usera:
-const changeDetectionModule = (function(){
+const changeDetectionModule = (function () {
+  // #Event1: [init program]
+  const state1 = calculateNewParagraphState();
+  console.log(state1);
+  // #Event2: [user typed: 'Have']
+  const state2 = calculateNewParagraphState(state1, "Have");
+  console.log(state2);
+  // #Event3: [user typed: ' you tried']
+  const state3 = calculateNewParagraphState(state2, " you tried");
+  console.log(state3);
+  // #Event4: [user typed: ' to turn it off and on again?']
+  const state4 = calculateNewParagraphState(
+    state3,
+    " to turn it off and on again?"
+  );
+  console.log(state4);
 
-	// #Event1: [init program]
-	const state1 = calculateNewParagraphState();
-	// #Event2: [user typed: 'Have']
-	const state2 = calculateNewParagraphState(state1, 'Have')
-	// #Event3: [user typed: ' you tried']
-	const state3 = calculateNewParagraphState(state2, ' you tried')
-	// #Event4: [user typed: ' to turn it off and on again?']
-	const state4 = calculateNewParagraphState(state3, ' to turn it off and on again?')
-
-	// Pogląd zmieniającego się w czasie stanu
-	// Zwracamy kolejne kroki podejmowanie przez usera:
-	return [state1, state2, state3, state4]
-})()
-
+  console.log(state1 === state2);
+  console.log(state1 === state3);
+  console.log(state1 === state4);
+  // Pogląd zmieniającego się w czasie stanu
+  // Zwracamy kolejne kroki podejmowanie przez usera:
+  return [state1, state2, state3, state4];
+})();
 
 // #Reguła:
 // Nie możesz zmieniać asercji poniżej:
@@ -57,24 +70,50 @@ const changeDetectionModule = (function(){
 // Pomocnicza destrukturyzacja kolejnych stanów aplikacji:
 const [first, second, third, forth] = changeDetectionModule;
 
+assertThat("At the init program, the state should be empty", (expect) =>
+  expect(first.paragraphTextContent).toBe("")
+); //=
+assertThat('Next, there should be a "Have" in the paragraph', (expect) =>
+  expect(second.paragraphTextContent).toBe("Have")
+); //=
 assertThat(
-	'At the init program, the state should be empty',
-	expect => expect(first.paragraphTextContent).toBe('')
-)  //=
+  'Next, there should be a "Have you tried" in the paragraph',
+  (expect) => expect(third.paragraphTextContent).toBe("Have you tried")
+); //=
 assertThat(
-	'Next, there should be a "Have" in the paragraph',
-	expect => expect(second.paragraphTextContent).toBe('Have')
-)  //=
-assertThat(
-	'Next, there should be a "Have you tried" in the paragraph',
-	expect => expect(third.paragraphTextContent).toBe('Have you tried')
-)  //=
-assertThat(
-	'Next, there should be a whole sentence inside a paragraph',
-	expect => expect(forth.paragraphTextContent).toBe('Have you tried to turn it off and on again?')
-)  //=
-assertThat(
-	'States are not the same object in memory',
-	expect => expect(first === second && second === third && third === forth).toBe(false)
-)  //=
+  "Next, there should be a whole sentence inside a paragraph",
+  (expect) =>
+    expect(forth.paragraphTextContent).toBe(
+      "Have you tried to turn it off and on again?"
+    )
+); //=
+assertThat("States are not the same object in memory", (expect) =>
+  expect(first === second && second === third && third === forth).toBe(false)
+); //=
 
+
+
+
+
+
+// Change detection w REACT (super uproszczony przykład):
+const myState = { comment: "Hello" };
+
+// pomocniczy stan:
+const previousState = { ...myState };
+
+// zmiana stanu z informacją że coś się zmienia!
+const nextState = {...myState};
+nextState.comment += " World";
+
+// nie chcę wiedzieć CO się zmieniło, tylko czy była zmiana
+
+console.log(previousState);
+console.log(myState);
+
+
+
+
+// nie wiemy co, ale coś się zmieniło, bo myState i nextState to inne obiekty!!!!
+// to nie referencje do tego samego obiektu!
+console.log(myState === nextState);
