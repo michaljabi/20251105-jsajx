@@ -50,7 +50,7 @@ console.log(personLinker)
 // 3.
 // Teraz, możemy zmienić obiekt na który wskazuje person:
 person = { name: 'Moss' }
-
+//personLinker = null;
 // To co się stało:
 // a) `person` prowadzi nas do nowo zadeklarowanego miejsca w pamięci z obiektem: { name: 'Moss' }
 // b) `personLinker` dalej prowadzi nas do tego samego obiektu w pamięci: { name: 'Jen', lastName: 'Barber' }
