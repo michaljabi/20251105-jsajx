@@ -13,7 +13,14 @@ import { assertThat } from '../../j4b1-assert.js'
 const shouterObject = new Proxy( {  }, {
 	// #Reguła:
 	// Kod piszemy tylko tutaj:
-
+	get(target, key) {
+		return target[key] + '!'
+	},
+	deleteProperty(target, key) {
+		// jeśli mam trap, ale nie mam implementacji to delete przestaje działać 
+	    // delete target[key];
+		// Reflect.deleteProperty(target, key)
+	}
 })
 
 // #Reguła:
